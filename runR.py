@@ -39,7 +39,7 @@ import leancloud
 import sys
 
 # component
-import theme
+from theme import butterfly,matery,volantis
 
 # handlers
 from handlers.coreSettings import configs
@@ -59,12 +59,13 @@ from threading import Thread
 
 # theme massage
 themes = [
-    theme.butterfly,
-    theme.matery,
-    theme.volantis
+    butterfly,
+    matery,
+    volantis
 ]
 
 # ---------- #
+
 
 # part
 def verification():
@@ -194,9 +195,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
-
-
-
-
-
