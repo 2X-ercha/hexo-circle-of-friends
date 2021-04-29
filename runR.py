@@ -79,7 +79,7 @@ def verification():
     return friendpage_link
 
 
-def get_link(friendpage_link):
+def get_link(friendpage_link, config):
     friend_poor = []
 
     #　get gitee_issue
@@ -170,7 +170,7 @@ def main():
     print('----------------------\n-----------！！开始执行爬取文章任务！！----------\n----------------------\n')
     print('----------------------\n-----------！！开始执行友链获取任务！！----------\n----------------------\n')
 
-    friend_poor = get_link(friendpage_link)
+    friend_poor = get_link(friendpage_link, config)
 
     print('----------------------\n-------------！！结束友链获取任务！！------------\n----------------------\n')
     print('----------------------\n---------！！开始执行最新文章获取任务！！--------\n----------------------\n')
