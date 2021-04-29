@@ -124,7 +124,7 @@ def get_post(friend_poor):
                 if error:
                     break
                 error = themelinkfun.get_last_post(item, post_poor)
-            if error == 'true':
+            if error:
                 print("-----------获取主页信息失败，采取sitemap策略----------")
                 error, post_poor = sitmap_get(item, post_poor)
         except Exception as e:
