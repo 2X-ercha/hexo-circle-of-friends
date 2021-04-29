@@ -34,4 +34,4 @@ jobs:
         $APP_KEY: ${{ secrets.APPKEY }}
         $LINK: ${{ secrets.LINK }} 
       run: | 
-        python runR.py ${{ secrets.APPID }} ${{ secrets.APPKEY }}  ${{ secrets.LINK }}
+        python run.py ${{ secrets.APPID }} ${{ secrets.APPKEY }}  ${{ secrets.LINK }}
