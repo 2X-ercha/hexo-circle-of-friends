@@ -108,7 +108,7 @@ def get_link(friendpage_link, config):
     return friend_poor
 
 
-def get_post():
+def get_post(friend_poor):
     total_count = 0
     error_count = 0
     post_poor = []
@@ -175,7 +175,7 @@ def main():
     print('----------------------\n-------------！！结束友链获取任务！！------------\n----------------------\n')
     print('----------------------\n---------！！开始执行最新文章获取任务！！--------\n----------------------\n')
 
-    post_poor = get_post()
+    post_poor = get_post(friend_poor)
 
     print('----------------------\n-----------！！结束最新文章获取任务！！----------\n----------------------\n')
     print('----------------------\n-----------！！执行用户信息上传任务！！----------\n----------------------\n')
