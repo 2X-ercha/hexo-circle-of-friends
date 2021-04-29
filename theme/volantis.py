@@ -131,7 +131,7 @@ def gitee_issuse(friend_poor):
 
 
 # Volantis  友链规则
-def volantis_get_friendlink(friendpage_link, friend_poor):
+def get_friendlink(friendpage_link, friend_poor):
     main_content = []
     result = request.get_data(friendpage_link)
     soup = BeautifulSoup(result, 'html.parser')
@@ -181,7 +181,7 @@ def volantis_get_friendlink(friendpage_link, friend_poor):
         github_issuse(friend_poor)
 
 
-def get_last_post_from_volantis(user_info, post_poor):
+def get_last_post(user_info, post_poor):
     error_sitmap = 'false'
     link = user_info[1]
     print('\n')

@@ -149,7 +149,7 @@ def main():
             item = spider(item)
         '''
 
-        # 多线程试写
+        # 多线程------
         Q = Queue()
 
         for i in range(len(friend_poor)):
@@ -170,6 +170,7 @@ def main():
             t.start()
         for t in threads:
             t.join()
+        # ---------------------
 
         print('\n')
         print('----------------------')
