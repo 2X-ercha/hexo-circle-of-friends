@@ -117,13 +117,13 @@ def get_post(friend_poor):
         nonlocal total_count
         nonlocal post_poor
         nonlocal error_count
-        error = 'false'
+        error = False
         try:
             total_count += 1
             for themelinkfun in themes:
                 if error:
                     break
-                themelinkfun.get_last_post(item, post_poor)
+                error = themelinkfun.get_last_post(item, post_poor)
             if error == 'true':
                 print("-----------获取主页信息失败，采取sitemap策略----------")
                 error, post_poor = sitmap_get(item, post_poor)
