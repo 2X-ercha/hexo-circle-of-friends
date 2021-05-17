@@ -107,6 +107,9 @@ def get_post(friend_poor):
             print('\n')
             print(e)
             error_count += 1
+        
+        if error: error = 'true'
+        else: error = 'false'
         item.append(error)
         return item
 
