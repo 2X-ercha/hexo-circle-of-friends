@@ -28,9 +28,8 @@ setting:
   block_chars: # 屏蔽sitemap获取标题的分割字符
     - '|'
     - '::'
-    - '-'
     - '·'
     - '绒布球'
 
   block_site: # 屏蔽站点
-    - https://example.com/
+    - https://noionion.top/
