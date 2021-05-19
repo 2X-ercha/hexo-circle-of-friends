@@ -174,4 +174,8 @@ def main():
 # ---------- #
 
 if __name__ == '__main__':
-    main()
+    config = configs.yml
+    frieng_poor = [['泰戈尔', 'https://www.iftiger.com/', 'img']]
+    post_poor = []
+    item = frieng_poor[0]
+    sitmap_get(item, post_poor)
