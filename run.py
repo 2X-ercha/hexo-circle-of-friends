@@ -14,7 +14,7 @@ import leancloud
 import sys
 
 # component
-from theme import butterfly,matery,volantis,sakura
+from theme import butterfly, fluid,matery,volantis,sakura,fluid
 
 # handlers
 from handlers.coreSettings import configs
@@ -37,7 +37,8 @@ themes = [
     butterfly,
     matery,
     volantis,
-    sakura
+    sakura,
+    fluid
 ]
 
 # ---------- #
@@ -75,7 +76,10 @@ def get_link(friendpage_link, config):
 
     # get theme_link
     for themelinkfun in themes:
-        themelinkfun.get_friendlink(friendpage_link, friend_poor)
+        try:
+            themelinkfun.get_friendlink(friendpage_link, friend_poor)
+        except:
+            pass
     friend_poor = delete_same_link(friend_poor)
     friend_poor = block_link(friend_poor)
 
@@ -95,13 +99,14 @@ def get_post(friend_poor):
         error = True
         try:
             total_count += 1
-            error, post_poor = sitmap_get(item, post_poor)
             if error:
-                print("-----------获取sitemap信息失败，采取主页爬虫策略----------")
                 for themelinkfun in themes:
                     if not error:
                         break
                     error = themelinkfun.get_last_post(item, post_poor)
+            if error: 
+                print("-----------获取主页信息失败，采取sitemap策略----------")
+                error, post_poor = sitmap_get(item, post_poor)
                 
         except Exception as e:
             print('\n')

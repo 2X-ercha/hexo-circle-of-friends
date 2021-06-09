@@ -31,5 +31,5 @@ setting:
     - '·'
     - '绒布球'
 
-  block_site: # 屏蔽站点
-    - https://noionion.top/
+  block_site: # 屏蔽站点(这个配置项需要在每条链接上加引号（单双引号均可）)
+    - 'https://noionion.top/'
