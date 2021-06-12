@@ -14,7 +14,7 @@ import leancloud
 import sys
 
 # component
-from theme import butterfly, fluid,matery,volantis,sakura,fluid
+from theme import butterfly,matery,volantis,sakura,fluid
 
 # handlers
 from handlers.coreSettings import configs
@@ -23,6 +23,8 @@ from handlers.coreLink import block_link
 from handlers.coreLink import kang_api
 from handlers.coreLink import github_issuse
 from handlers.coreLink import sitmap_get
+from handlers.coreLink import atom_get
+from handlers.coreLink import rss2_get
 from handlers.coreDatas import leancloud_push_userinfo
 from handlers.coreDatas import leancloud_push
 
@@ -99,7 +101,12 @@ def get_post(friend_poor):
         error = True
         try:
             total_count += 1
+            error, post_poor = atom_get(item, post_poor)
             if error:
+                print("-----------获取atom信息失败，采取rss2策略----------")
+                error, post_poor = rss2_get(item, post_poor)
+            if error:
+                print("-----------获取rss2信息失败，采取主页爬虫策略----------")
                 for themelinkfun in themes:
                     if not error:
                         break
@@ -147,6 +154,7 @@ def get_post(friend_poor):
     print('\n----------------------\n一共进行{}次\n一共失败{}次\n----------------------\n'.format(total_count, error_count))
     return post_poor
 
+# main
 def main():
     config = configs.yml
 

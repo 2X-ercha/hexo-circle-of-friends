@@ -5,6 +5,7 @@
 """
 from bs4 import BeautifulSoup
 import re
+import calendar
 
 from handlers.coreSettings import configs as config
 from request_data import request
@@ -274,3 +275,103 @@ def sitmap_get(user_info, post_poor, config=config.yml):
     print('-----------结束sitemap规则----------')
     print('\n')
     return error_sitmap, post_poor
+
+
+# 通过atom请求
+def atom_get(user_info, post_poor, config=config.yml):
+    print('\n')
+    print('-------执行atom规则----------')
+    print('执行链接：', user_info[1])
+    link = user_info[1]
+    error_atom = False
+    try:
+        html = request.get_data(link + "/atom.xml")
+        # print(html)
+        soup = BeautifulSoup(html, "xml")
+        items = soup.find_all("entry")
+        l = 5
+        new_loc = []
+        new_loc_time = []
+        if len(items) < 5: l = len(items)
+
+        if l == 0:
+            error_atom = True
+            print('该网站可能没有atom')
+        else:
+            for i in range(l):
+                post_info = {}
+                item = items[i]
+                title = item.find("title").text
+                url = item.find("link")['href']
+                time = item.find("published").text[:10]
+                post_info['title'] = title
+                post_info['time'] = time
+                post_info['link'] = url
+                post_info['name'] = user_info[0]
+                post_info['img'] = user_info[2]
+                new_loc.append(url)
+                new_loc_time.append(time)
+                post_poor.append(post_info)
+            print('该网站最新的{}条atom为：'.format(l), new_loc[0:5])
+            print('该网站最新的{}个时间为：'.format(l), new_loc_time[0:5])
+    except Exception as e:
+        print('无法请求atom')
+        print(e)
+        print(e.__traceback__.tb_frame.f_globals["__file__"])
+        print(e.__traceback__.tb_lineno)
+        error_atom = True
+    print('-----------结束atom规则----------')
+    print('\n')
+    return error_atom, post_poor
+
+
+# 通过RSS2请求
+def rss2_get(user_info, post_poor, config=config.yml):
+    print('\n')
+    print('-------执行rss2规则----------')
+    print('执行链接：', user_info[1])
+    link = user_info[1]
+    error_atom = False
+    try:
+        html = request.get_data(link + "/rss.xml")
+        soup = BeautifulSoup(html, "xml")
+        items = soup.find_all("item")
+        if len(items) == 0:
+            html = request.get_data(link + "/rss2.xml")
+            soup = BeautifulSoup(html, "xml")
+            items = soup.find_all("item")
+        l = 5
+        new_loc = []
+        new_loc_time = []
+        if len(items) < 5: l = len(items)
+        if l == 0:
+            error_atom = True
+            print('该网站可能没有rss')
+        else:
+            for i in range(l):
+                post_info = {}
+                item = items[i]
+                title = item.find("title").text
+                url = item.find("link").text
+                timedata = item.find("pubDate").text.split(" ")
+                y, m, d = int(timedata[3]), list(calendar.month_abbr).index(timedata[2]), int(timedata[1])
+                time = "{:02d}-{:02d}-{:02d}".format(y,m,d)
+                post_info['title'] = title
+                post_info['time'] = time
+                post_info['link'] = url
+                post_info['name'] = user_info[0]
+                post_info['img'] = user_info[2]
+                new_loc.append(url)
+                new_loc_time.append(time)
+                post_poor.append(post_info)
+            print('该网站最新的{}条rss为：'.format(l), new_loc[0:5])
+            print('该网站最新的{}个时间为：'.format(l), new_loc_time[0:5])
+    except Exception as e:
+        print('无法请求rss/rss2')
+        print(e)
+        print(e.__traceback__.tb_frame.f_globals["__file__"])
+        print(e.__traceback__.tb_lineno)
+        error_atom = True
+    print('-----------结束rss2规则----------')
+    print('\n')
+    return error_atom, post_poor
