@@ -116,7 +116,8 @@ def get_post(friend_poor):
                 print("-----------获取主页信息失败，采取sitemap策略----------")
                 error, post_poor = sitmap_get(item, post_poor)
             '''
-                
+            if error:
+                error_count += 1
         except Exception as e:
             print('\n')
             print(item, "运用主页及sitemap爬虫爬取失败！请检查")
@@ -142,7 +143,7 @@ def get_post(friend_poor):
             item = friend_poor[i]
             item = spider(item)
 
-    cores = 128
+    cores = 1
     threads = []
     for _ in range(cores):
         t = Thread(target=multitask)
