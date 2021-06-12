@@ -102,7 +102,6 @@ def get_post(friend_poor):
         try:
             total_count += 1
             error, post_poor = atom_get(item, post_poor)
-            '''
             if error:
                 print("-----------获取atom信息失败，采取rss2策略----------")
                 error, post_poor = rss2_get(item, post_poor)
@@ -115,12 +114,14 @@ def get_post(friend_poor):
             if error: 
                 print("-----------获取主页信息失败，采取sitemap策略----------")
                 error, post_poor = sitmap_get(item, post_poor)
-            '''
             if error:
+                print('\n')
+                print(item, "所有规则爬取失败！请检查")
+                print('\n')
                 error_count += 1
         except Exception as e:
             print('\n')
-            print(item, "运用主页及sitemap爬虫爬取失败！请检查")
+            print(item, "所有规则爬取失败！请检查")
             print('\n')
             print(e)
             error_count += 1
@@ -143,7 +144,7 @@ def get_post(friend_poor):
             item = friend_poor[i]
             item = spider(item)
 
-    cores = 1
+    cores = 128
     threads = []
     for _ in range(cores):
         t = Thread(target=multitask)
