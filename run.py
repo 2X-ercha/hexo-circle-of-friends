@@ -101,11 +101,11 @@ def get_post(friend_poor):
         error = True
         try:
             total_count += 1
-            # error, post_poor = atom_get(item, post_poor)
+            error, post_poor = atom_get(item, post_poor)
+            '''
             if error:
                 print("-----------获取atom信息失败，采取rss2策略----------")
                 error, post_poor = rss2_get(item, post_poor)
-            '''
             if error:
                 print("-----------获取rss2信息失败，采取主页爬虫策略----------")
                 for themelinkfun in themes:
