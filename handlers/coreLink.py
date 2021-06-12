@@ -287,7 +287,7 @@ def atom_get(user_info, post_poor, config=config.yml):
     try:
         html = request.get_data(link + "/atom.xml")
         # print(html)
-        soup = BeautifulSoup(html, "xml")
+        soup = BeautifulSoup(html, 'html.parser')
         items = soup.find_all("entry")
         l = 5
         new_loc = []
@@ -334,11 +334,11 @@ def rss2_get(user_info, post_poor, config=config.yml):
     error_atom = False
     try:
         html = request.get_data(link + "/rss.xml")
-        soup = BeautifulSoup(html, "xml")
+        soup = BeautifulSoup(html, 'html.parser')
         items = soup.find_all("item")
         if len(items) == 0:
             html = request.get_data(link + "/rss2.xml")
-            soup = BeautifulSoup(html, "xml")
+            soup = BeautifulSoup(html, 'html.parser')
             items = soup.find_all("item")
         l = 5
         new_loc = []
