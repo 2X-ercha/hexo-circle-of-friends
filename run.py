@@ -109,6 +109,7 @@ def get_link(friendpage_link, config):
             themelinkfun.get_friendlink(friendpage_link, friend_poor)
         except:
             pass
+    print("----------------------")
     friend_poor = delete_same_link(friend_poor)
     friend_poor = block_link(friend_poor)
 
@@ -191,26 +192,10 @@ def get_post(friend_poor):
 
 def main():
     config = configs.yml
-
     friendpage_link = verification()
-
-    # print('----------------------\n-----------！！开始执行爬取文章任务！！----------\n----------------------\n')
-    # print('----------------------\n-----------！！开始执行友链获取任务！！----------\n----------------------\n')
-
     friend_poor = get_link(friendpage_link, config)
-
-    # print('----------------------\n-------------！！结束友链获取任务！！------------\n----------------------\n')
-    # print('----------------------\n---------！！开始执行最新文章获取任务！！--------\n----------------------\n')
-
     post_poor = get_post(friend_poor)
-
-    # print('----------------------\n-----------！！结束最新文章获取任务！！----------\n----------------------\n')
-    # print('----------------------\n-----------！！执行用户信息上传任务！！----------\n----------------------\n')
-
-    leancloud_push_userinfo(friend_poor)
-    
-    # print('----------------------\n-----------！！结束用户信息上传任务！！----------\n----------------------\n')
-    
+    leancloud_push_userinfo(friend_poor) 
     post_poor.sort(key=itemgetter('name'), reverse=True)
     person = ""
     for post in post_poor:
@@ -220,12 +205,7 @@ def main():
             person = post["name"]
         print("《{}》\n文章发布时间：{}\t\t采取的爬虫规则为：{}".format(post["title"], post["time"], post["rule"]))
     print("----------------------")
-
-    # print('----------------------\n-----------！！执行文章信息上传任务！！----------\n----------------------\n')
-    
     leancloud_push(post_poor)
-
-    # print('----------------------\n-----------！！结束文章信息上传任务！！----------\n----------------------\n')
 
 # ---------- #
 
