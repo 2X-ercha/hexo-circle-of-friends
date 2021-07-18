@@ -153,8 +153,7 @@ def leancloud_push(post_poor):
         friendpoor.set('author', item['name'])
         friendpoor.set('headimg', item['img'])
         friendpoor.set('rule', item['rule'])
-        # upload = repeat(item['link'])
-        upload = 'true'
+        upload = repeat(item['link'])
         if upload == 'true':
             try:
                 friendpoor.save()
