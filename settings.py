@@ -45,7 +45,7 @@ FRIENPAGE_LINK = "https://zhangyazhuang.gitee.io/link/"
 # 超时(单位:秒)
 TIMEOUT = 10
 SSL = False
-RETRY_MAX = 5
+RETRY_MAX = 2
 
 
 

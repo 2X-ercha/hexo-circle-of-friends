@@ -21,9 +21,9 @@ def delete_same_link(orign_friend_poordic):
         if item[1] not in friend_poorlink:
             friend_poorlink.append(item[1])
             friend_poordic.append(item)
-        # else:
+        else:
             # print('-----------------')
-            # print('重复1条友链链接，已删除！链接为：', item[1])
+            print('友链重复，已删除！链接为：', item[1])
             # print('-----------------')
     return friend_poordic
 
@@ -37,9 +37,9 @@ def block_link(orign_friend_poordic, config = config.yml):
     for item in orign_friend_poordic:
         if item[1] not in block_site:
             friend_poordic.append(item)
-        # else:
+        else:
             # print('-----------------')
-            # print('屏蔽1条友链链接，屏蔽链接为：', item[1])
+            print('屏蔽1条友链链接，屏蔽链接为：', item[1])
             # print('-----------------')
     return friend_poordic
 
